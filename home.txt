@@ -1,0 +1,219 @@
+home
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ACCIDENT</title>
+    <class="subtitle" style="color:white">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+
+.hero {
+    background: black url(static/images/bg2.jpg) center / cover;
+}
+    </style>
+
+  </head>
+
+    
+<body>
+
+<!-- .hero -->
+<section class="hero is-fullheight" has-background-red>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                ROAD ACCIDENT SEVERITY AND HOSPITAL RECOMMENDATION USING DEEP LEARNING TECHNIQUES.
+
+            </h1>
+            <p class="subsubtitle">
+                by<Python</strong>
+            </p>
+        </div>   
+    </section> 
+
+
+    <section class="section">
+        <div class="container has-text-centered bg-text" style="width: 100%">
+                <p class="subtitle" style="color:white">
+                  Check if your furry friend is truly a ACCIDENT Identification!
+                </p>
+              <div>
+                <i class="arrow_down"></i>
+                <form action="/classify" method="post" enctype="multipart/form-data" style="margin-top: 30px; width: 80%; text-align: center; margin: auto;">
+                  <div class="file has-name is-centered">     
+                      <label class="file-label">
+                        <input class="file-input" type="file" id="image" name = "image">
+                        <span class="file-cta">
+                          <span class="file-label">
+                            Upload an image
+                          </span>
+                        </span>
+                        <span class="file-name" id="file-name">
+                          No file chosen
+                        </span>
+      
+                      </label>
+                    </div>
+                    <br>
+                    <input type="submit" value="Classify" class="button is-black" name = "image" id="classify_button">
+                </form>
+      
+                </div>
+               
+              </div>
+            </div>
+        </div>
+</section>
+
+
+<nav class="level">
+
+        <div class="level-item has-text-centered">
+          <div>
+            
+                <img src="static/images/emergencysign.jpg" width=200px; height=200px; alt="Bulma: Free, open source, &amp; modern CSS framework based on Flexbox" style="max-height: 100%;">
+            </a>
+          </div>
+        </div>
+      </nav>
+
+</section>
+
+
+<!-- .section -->
+<section class="bd-footer-link">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                        <article class="media notification has-background-white">
+                            <div class="media-content">
+                                <div class="content">
+                                    <p class="subsubtitle">
+                                    <strong>Contact</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                <div class="column">
+                    <article class="media notification has-background-white">
+                        <div class="media-content">
+                            <div class="content">
+                                <div class="columns">
+                                    <!-- <div class="column">
+                                        <p class="subsubtitle">
+                                            <strong>Project</strong>
+                                        </p>
+                                    </div> -->
+                                   
+                                   
+                            </div>    
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.section -->
+<!-- /.hero -->
+
+
+<script src="/static/script.js"></script>
+</body>
+</html>
+
+
+
+classify
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ACCIDENT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        .hero {
+            background: black url(static/images/white.jpg) center / cover;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero is-fullheight" has-background-black>
+    <section class="section">
+        <div class="container">
+            <h1 class="title" style="font-size:2.5rem">
+                 ROAD ACCIDENT SEVERITY AND HOSPITAL RECOMMENDATION USING DEEP LEARNING TECHNIQUES.
+
+            </h1>
+            <p class="subsubtitle">
+                by<strong>Python</strong>
+            </p>
+        </div>
+    </section>
+
+    <div class="columns">
+        <div class="column is-narrow">
+        </div>
+
+        <div class="column is-one-third has-text-centered">
+            <img class="pred_img" src="{{ url_for('send_file', filename=image_file_name)}}"/>
+        </div>
+
+        <div class="column is-one-quarter" style="font-size:2.5rem">
+            <h2 id="pred" style="color:black">
+                This is a <span style="font-weight: bold; color:black;">{{ label }}</span>
+            </h2>
+
+            <h2 style="font-size: 2rem">
+                Confidence: <span style="font-weight: bold; color:black;">{{ prob }}</span>
+            </h2>
+
+            <!-- Display label details based on the predicted label -->
+            <div id="labelDetails" style="color:black; margin-top: 20px;">
+                {% if label == 'mild' %}
+                    <p>Hospitals:-Yashoda Hospitals</p>
+                    <p>Doctor Name:-Dr. Srinath MBBS, MD Accident and Emergency Medicine</p>
+		    <p>Department: Emergency Service</p>
+                {% elif label == 'moderate' %}
+                    <p>Hospital:-KIMS Hospitals, Secunderabad</p>
+                    <p>Doctor Name:-Dr. Kagula Sekhar is the Head of the Department of Emergency Medicine</p>
+                {% else %}
+                    <p>Hospital:-star hospital</p>
+                    <p>Doctor Name:-Dr. Rahul Katta Ramanjaneya Group Lead, Department of Emergency Medicine</p>
+                {% endif %}
+            </div>
+
+            <br>
+            <a href="/" class="button is-white is-inverted is-outlined" style="font-size:1.5rem">Back to Home</a>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+        </div>
+    </section>
+</section>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
